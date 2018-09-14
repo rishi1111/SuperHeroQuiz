@@ -12,6 +12,7 @@
 </head>
 <%
 	RegisterBean user = (RegisterBean) session.getAttribute("USER");
+
 %>
 <body>
 	<div class="container">
@@ -20,7 +21,7 @@
 			<h2>SuperHero Quiz</h2>
 
 		</div>
-		<div class="col-lg-7 " style="border: 2px solid red;">Navigation
+		<div class="col-lg-7" style="border: 2px solid red;">Navigation
 			Bar</div>
 
 		<div class="col-lg-2 ">

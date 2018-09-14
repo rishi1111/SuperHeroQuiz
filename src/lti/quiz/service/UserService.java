@@ -12,5 +12,5 @@ public interface UserService {
 	boolean validate(ForgetBean forget);
 	
 	boolean update(LoginBean change);
-	
+	boolean updateProfile(String hero, String email);
 }

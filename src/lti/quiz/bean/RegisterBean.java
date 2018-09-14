@@ -5,7 +5,7 @@ public class RegisterBean {
 	private String email,password,answer,profile;
 	
 	public RegisterBean() {
-		profile="img/deadpool.jpg";
+		
 	}
 
 	public String getEmail() {
@@ -38,6 +38,7 @@ public class RegisterBean {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+		
 	}
 	
 	

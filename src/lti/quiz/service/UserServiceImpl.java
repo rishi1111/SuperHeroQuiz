@@ -61,4 +61,10 @@ public class UserServiceImpl implements UserService {
 		return dao.update(change);
 	}
 
+	@Override
+	public boolean updateProfile(String hero, String email) {
+		
+		return dao.updateProfile(hero, email);
+	}
+
 }
