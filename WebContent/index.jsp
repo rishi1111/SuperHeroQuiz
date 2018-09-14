@@ -9,8 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SuperHero Quiz</title>
 </head>
+
+<jsp:include page="banner.jsp"/>
+
 <body><div class="container">
-	<h1>SuperHero Quiz</h1>
 	<h3>Find out which hero do you resemble the most.</h3>
 	
 	

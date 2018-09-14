@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Change Password</title>
 </head>
+<jsp:include page="banner.jsp"/>
 
 <body>
 	<div class="container">
