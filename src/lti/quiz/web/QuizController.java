@@ -68,8 +68,9 @@ public class QuizController extends HttpServlet {
 			request.setAttribute("Hero", hero);
 
 			RegisterBean user = (RegisterBean) session.getAttribute("USER");
-
-			usr_service.updateProfile(hero, (String) user.getEmail());
+			user.setProfile(hero);
+			session.setAttribute("USER", user);
+			usr_service.updateProfile(user);
 			getServletContext().getRequestDispatcher("/result.jsp").forward(request, response);
 		}
 

@@ -18,9 +18,7 @@
 	<div class="container">
 		<h1>You resemble this superhero B)</h1>
 		<%
-			String hero = (String) request.getAttribute("Hero");
-			user.setProfile(hero);
-			session.setAttribute("hero",null);
+			String hero =(String)user.getProfile();
 		%>
 		<img src="<%=hero%>"> <a href="quiz.quiz">Retake this quiz</a>
 		<%@ include file="footer.html"%>

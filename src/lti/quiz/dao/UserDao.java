@@ -12,6 +12,6 @@ public interface UserDao {
 	
 	boolean update(LoginBean change);
 	
-	boolean updateProfile(String hero, String email);
+	boolean updateProfile(RegisterBean user);
 	
 }

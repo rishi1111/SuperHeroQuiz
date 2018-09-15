@@ -164,16 +164,17 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public boolean updateProfile(String hero, String email) {
+	public boolean updateProfile(RegisterBean user) {
 		String sql = "update users set profile =? where email =?";
 		Connection conn = null;
 
+		
 		try {
 			conn = getConnection();
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, hero);
-			pstmt.setString(2, email);
+			pstmt.setString(1, (String)user.getProfile());
+			pstmt.setString(2, (String)user.getEmail());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
