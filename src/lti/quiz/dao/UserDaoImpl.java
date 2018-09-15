@@ -29,30 +29,29 @@ public class UserDaoImpl implements UserDao {
 			stmt.setString(2, login.getPassword());
 			ResultSet rs = stmt.executeQuery();
 			RegisterBean register = null;
-			
-			//Traversing through ResultSet object and retrieving values
+
+			// Traversing through ResultSet object and retrieving values
 			if (rs.next()) {
 				register = new RegisterBean();
-				register.setEmail(rs.getString(1)); //setting RegisterBean properties
-				
-				if (!rs.getString(4).equals(""))
-					register.setProfile(rs.getString(4));
-				
+				register.setEmail(rs.getString(1)); // setting RegisterBean properties
+
+				register.setProfile(rs.getString(4));
+
 				return register;
-				
+
 			}
-			//returning object of RegisterBean
+			// returning object of RegisterBean
 			return register;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null; 
+			return null;
 		} finally {
 			try {
 				if (conn != null)
-				//closing connection 
+					// closing connection
 					conn.close();
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -61,11 +60,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	private Connection getConnection() throws SQLException {
-		//registering driver
+		// registering driver
 		DriverManager.registerDriver(new OracleDriver());
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		
-		//opening a connection
+
+		// opening a connection
 		Connection conn = DriverManager.getConnection(url, "rishi", "compaq");
 		return conn;
 	}
@@ -89,7 +88,7 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 			return false;
 		} finally {
-			//clean up
+			// clean up
 			try {
 				if (conn != null)
 					conn.close();
@@ -102,10 +101,10 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean validate(ForgetBean forget) {
-		
+
 		String sql = "select * from users where email = ?  and answer = ?";
 		Connection conn = null;
-		
+
 		try {
 			conn = getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -159,6 +158,28 @@ public class UserDaoImpl implements UserDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		return false;
+
+	}
+
+	@Override
+	public boolean updateProfile(RegisterBean user) {
+		String sql = "update users set profile =? where email =?";
+		Connection conn = null;
+
+		
+		try {
+			conn = getConnection();
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)user.getProfile());
+			pstmt.setString(2, (String)user.getEmail());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 

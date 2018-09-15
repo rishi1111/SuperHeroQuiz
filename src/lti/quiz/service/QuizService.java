@@ -8,5 +8,6 @@ public interface QuizService {
 
 	List<QuizBean> loadQuiz();
 	
-	String getResult(String code);
+
+	String getResult(List<String> scores);
 }

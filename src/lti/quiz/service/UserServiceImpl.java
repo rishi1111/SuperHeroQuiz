@@ -33,11 +33,10 @@ public class UserServiceImpl implements UserService {
 		Encoder encoder = Base64.getEncoder();
 		String encodedPass = encoder.encodeToString(register.getPassword().getBytes());
 		String encodedAns = encoder.encodeToString(register.getAnswer().getBytes());
-		
+
 		register.setAnswer(encodedAns);
 		register.setPassword(encodedPass);
-		
-		
+
 		return dao.register(register);
 	}
 
@@ -59,6 +58,12 @@ public class UserServiceImpl implements UserService {
 		change.setPassword(encodedPass);
 
 		return dao.update(change);
+	}
+
+	@Override
+	public boolean updateProfile(RegisterBean user) {
+
+		return dao.updateProfile(user);
 	}
 
 }
