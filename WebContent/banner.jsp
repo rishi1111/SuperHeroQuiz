@@ -15,47 +15,24 @@
 
 %>
 <body>
-	<div class="container">
-		<div class="col-lg-3" style="border: 2px solid black;">
-
-			<h2>SuperHero Quiz</h2>
-
-		</div>
-		<div class="col-lg-7" style="border: 2px solid red;">Navigation
-			Bar</div>
-
-		<div class="col-lg-2 ">
-			<div class="col-lg-8">
-				<%
-					if (user != null) {
-				%>
-				<%=user.getEmail()%>
-				<br> <a href="user.quiz?logout=yes">Logout</a>
-
-				<%
-					} else {
-				%>
-
-				Welcome Guest
-				<%
-					}
-				%>
-			</div>
-			<div class="col-lg-4">
-				<%
-					if (user != null) {
-				%>
-				<img alt="profilepic" src=<%=(String) user.getProfile()%>
-					height="120" width="150">
-
-				<%
-					}
-				%>
-			</div>
-
-		</div>
-
-	</div>
+	
+	
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SuperHero Quiz</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
 </body>
 <hr>
 </html>

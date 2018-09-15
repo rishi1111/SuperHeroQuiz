@@ -1,18 +1,34 @@
 package lti.quiz.dao;
 
 import java.sql.Connection;
-
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import lti.quiz.bean.ForgetBean;
 import lti.quiz.bean.LoginBean;
 import lti.quiz.bean.RegisterBean;
-import oracle.jdbc.OracleDriver;
 
 public class UserDaoImpl implements UserDao {
+	
+	
+	
+	private Connection getConnection() throws SQLException {
+		try {
+			Context initContext = new InitialContext();
+			Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/quiz");
+			Connection conn = ds.getConnection();
+			return conn;
+		} catch (NamingException e) {
+			throw new SQLException(e.getMessage());
+		}
+	}
 
 	@Override
 	public RegisterBean authenticate(LoginBean login) {
@@ -57,16 +73,6 @@ public class UserDaoImpl implements UserDao {
 			}
 		}
 
-	}
-
-	private Connection getConnection() throws SQLException {
-		// registering driver
-		DriverManager.registerDriver(new OracleDriver());
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-
-		// opening a connection
-		Connection conn = DriverManager.getConnection(url, "rishi", "compaq");
-		return conn;
 	}
 
 	@Override
@@ -168,13 +174,12 @@ public class UserDaoImpl implements UserDao {
 		String sql = "update users set profile =? where email =?";
 		Connection conn = null;
 
-		
 		try {
 			conn = getConnection();
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, (String)user.getProfile());
-			pstmt.setString(2, (String)user.getEmail());
+			pstmt.setString(1, (String) user.getProfile());
+			pstmt.setString(2, (String) user.getEmail());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
